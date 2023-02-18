@@ -19,6 +19,28 @@ void increment3(const int &ref, int * ptr){
     std::cout << "ptr: "<< *ptr << std::endl;
 }
 
+class Foo{
+    public:
+        Foo(int c){
+            num = c;
+        }
+        int get_num(){return num;} 
+
+        Foo operator+ (Foo &other) {
+            Foo temp(this->num + other.get_num());
+            return temp; 
+        }
+
+        bool operator==(Foo &other){
+            if(this->num == other.get_num()) 
+                return true;
+            return false;
+        }
+
+    private:
+        int num;
+};
+
 int main() {
     // Add as many prints to cout as you need to answer the questions.
     // Leave them in your code when you turn it in.
@@ -96,4 +118,15 @@ int main() {
     // hint: for operator+, the function signature when implemented as a member function of the Object class is:
     // Object operator+(const Object &other)
     // Answer:
+    Foo bar1(100);
+    Foo bar2(100);
+
+    if(bar1 == bar2){
+        std::cout << "bar1 and bar2 are equal" << std::endl;
+    }
+    else{
+        std::cout << "bar1 and bar2 are not equal" << std::endl;
+    }
+    Foo bar3 = bar1 + bar2;
+    std::cout << "Num: "<< bar3.get_num() <<std::endl;
 }
